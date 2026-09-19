@@ -5,13 +5,13 @@ import CtaBand from '../components/CtaBand.astro';
 import { services, studio } from '../data/site';
 ---
 <BaseLayout title="Serviços" description="Serviços de tatuagem da Fallen Tattoo Studio: projetos personalizados, continuação, cobertura, revitalização e fechamentos corporais.">
-  <PageHero eyebrow="Serviços" title="Cada ponto de partida pede um plano." description="Nova tattoo, continuidade ou retrabalho: a equipe avalia o que existe, o que você deseja e o que funciona para a região do corpo." />
+  <PageHero eyebrow="Serviços" title="Tatuagem nova, cobertura e retrabalho." description="A equipe avalia a referência, a pele, a região do corpo e o trabalho existente antes do orçamento." />
   <section class="section">
     <div class="wrap service-list">
       {services.map((service, index) => (
-        <article class="service-feature" data-reveal>
+        <article class="service-feature" data-reveal={index % 2 ? 'right' : 'left'}>
           <div class="service-feature__image"><img src={service.image.src} alt={service.image.alt} width={service.image.width} height={service.image.height} loading={index === 0 ? 'eager' : 'lazy'} /></div>
-          <div class="service-feature__copy"><span class="eyebrow">0{index + 1}</span><h2>{service.title}</h2><p class="lede">{service.text}</p><p>O atendimento começa por uma avaliação do projeto. Valores, tempo e possibilidades são informados depois desse alinhamento.</p><a class="button button--ghost" href={studio.whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento</a></div>
+          <div class="service-feature__copy"><h2>{service.title}</h2><p class="lede">{service.text}</p><p>Valores e tempo são informados depois da avaliação.</p><a class="button button--ghost" href={studio.whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento</a></div>
         </article>
       ))}
     </div>
@@ -22,9 +22,9 @@ import { services, studio } from '../data/site';
   .service-list { display: grid; gap: clamp(70px, 10vw, 140px); }
   .service-feature { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(42px, 8vw, 110px); align-items: center; }
   .service-feature:nth-child(even) .service-feature__image { order: 2; }
-  .service-feature__image { border-radius: 18px; overflow: hidden; }
-  .service-feature__image img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .service-feature__image { border-radius: 3px; overflow: hidden; }
+  .service-feature__image img { width: 100%; max-height: 560px; aspect-ratio: 4 / 5; object-fit: cover; }
   .service-feature__copy p:not(.lede) { max-width: 580px; color: var(--muted); }
   .service-feature__copy .button { margin-top: 16px; }
-  @media (max-width: 760px) { .service-feature { grid-template-columns: 1fr; } .service-feature:nth-child(even) .service-feature__image { order: initial; } }
+  @media (max-width: 760px) { .service-feature { grid-template-columns: 1fr; gap: 26px; } .service-feature:nth-child(even) .service-feature__image { order: initial; } .service-feature__image img { max-height: 330px; aspect-ratio: 4 / 3; } }
 </style>

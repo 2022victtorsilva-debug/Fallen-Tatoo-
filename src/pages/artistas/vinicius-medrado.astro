@@ -6,28 +6,32 @@ import { url } from '../../lib/paths';
 ---
 <BaseLayout title="Vinícius Medrado" description="Conheça Vinícius Medrado na Fallen Tattoo Studio e veja retratos, composições e trabalhos presentes no portfólio.">
   <section class="artist-hero">
-    <img class="artist-hero__image" src={url('/images/11-artist-vinicius-machine-portrait.webp')} alt="Vinícius Medrado segurando uma máquina de tatuagem" width="1235" height="1536" fetchpriority="high" />
-    <div class="artist-hero__shade"></div>
-    <div class="wrap artist-hero__content"><span class="eyebrow">Artista — Fallen Tattoo Studio</span><h1>Vinícius<br/><em>Medrado</em></h1><p>Uma apresentação visual construída com os retratos e trabalhos fornecidos para o projeto.</p><div class="button-row"><a class="button" href={studio.viniciusInstagram} target="_blank" rel="noreferrer">Instagram de Vinícius</a><a class="button button--ghost" href={studio.whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento</a></div></div>
+    <div class="wrap artist-hero__grid">
+      <div class="artist-hero__content"><span class="eyebrow">Artista da Fallen</span><h1>Vinícius<br/><em>Medrado</em></h1><p>Veja uma seleção de trabalhos e acompanhe Vinícius pelo Instagram.</p><div class="button-row"><a class="button" href={studio.viniciusInstagram} target="_blank" rel="noreferrer">Instagram de Vinícius</a><a class="button button--ghost" href={studio.whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento</a></div></div>
+      <figure class="artist-hero__portrait"><img src={url('/images/11-artist-vinicius-machine-portrait.webp')} alt="Vinícius Medrado segurando uma máquina de tatuagem" width="1235" height="1536" fetchpriority="high" /></figure>
+    </div>
   </section>
-  <section class="section"><div class="wrap artist-story"><div data-reveal><span class="eyebrow">Materiais do artista</span><h2>Retrato, processo e composição.</h2><p class="lede">O portfólio é o centro desta página. As imagens mostram diferentes resultados sem atribuir uma especialidade que não foi confirmada.</p></div><img data-reveal src={url('/images/10-artist-vinicius-collage.webp')} alt="Colagem de trabalhos de Vinícius Medrado" width="1536" height="1536" loading="lazy" /></div></section>
-  <section class="section section--line"><div class="wrap artist-editorial"><img data-reveal src={url('/images/12-artist-vinicius-sofa-portrait.png')} alt="Retrato editorial de Vinícius Medrado sentado no estúdio" width="1229" height="1536" loading="lazy" /><div><span class="eyebrow">Seleção</span><h2>Trabalhos no portfólio.</h2><div class="mini-grid">{portfolio.slice(1,5).map((item) => <a href={url('/portfolio/')}><img src={item.src} alt={item.alt} width={item.width} height={item.height} loading="lazy" /></a>)}</div></div></div></section>
+  <section class="section"><div class="wrap artist-story"><figure data-reveal="left"><img src={url('/images/12-artist-vinicius-sofa-portrait.png')} alt="Vinícius Medrado sentado no estúdio" width="1229" height="1536" loading="lazy" /></figure><div data-reveal="right"><span class="eyebrow">Vinícius na Fallen</span><h2>Trabalho e referências.</h2><p class="lede">As fotos abaixo reúnem tatuagens apresentadas no portfólio da Fallen.</p><img class="artist-collage" src={url('/images/10-artist-vinicius-collage.webp')} alt="Colagem de trabalhos de Vinícius Medrado" width="1536" height="1536" loading="lazy" /></div></div></section>
+  <section class="section section--line"><div class="wrap"><div class="section-header" data-reveal="left"><div><span class="eyebrow">Portfólio</span><h2>Seleção de trabalhos.</h2></div><p>Toque em uma imagem para abrir o portfólio completo.</p></div><div class="mini-grid">{portfolio.slice(1,7).map((item, index) => <a class={`work-${index + 1}`} href={url('/portfolio/')} data-reveal="scale"><img src={item.src} alt={item.alt} width={item.width} height={item.height} loading="lazy" /></a>)}</div></div></section>
   <section class="section"><div class="wrap"><CtaBand title="Quer conversar sobre um projeto com Vinícius?" /></div></section>
 </BaseLayout>
 <style>
-  .artist-hero { position: relative; min-height: min(860px, calc(100svh - 74px)); display: flex; align-items: flex-end; overflow: hidden; }
-  .artist-hero__image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
-  .artist-hero__shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,5,5,.97), rgba(5,5,5,.5) 54%, rgba(5,5,5,.08)), linear-gradient(0deg, rgba(5,5,5,.8), transparent 45%); }
-  .artist-hero__content { position: relative; padding-block: 110px 70px; }
+  .artist-hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); background: radial-gradient(circle at 78% 24%, rgba(95,18,30,.22), transparent 30%); }
+  .artist-hero__grid { min-height: min(800px, calc(100svh - 74px)); display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: clamp(45px, 8vw, 110px); padding-block: 70px; }
+  .artist-hero__portrait { align-self: stretch; margin: 0; overflow: hidden; clip-path: inset(0 0 0 100%); animation: portrait-reveal .8s .12s var(--ease) forwards; }
+  .artist-hero__portrait img { width: 100%; height: 100%; max-height: 680px; object-fit: cover; object-position: center 38%; }
+  .artist-hero__content { position: relative; z-index: 1; }
   .artist-hero h1 em { color: var(--gold-bright); font-weight: 400; }
-  .artist-hero p { max-width: 540px; margin: 24px 0 30px; color: #c9c2b8; font-size: 1.1rem; }
-  .artist-story { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(45px, 8vw, 110px); align-items: center; }
-  .artist-story img { border-radius: 18px; }
-  .artist-editorial { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(45px, 8vw, 110px); align-items: start; }
-  .artist-editorial > img { width: 100%; border-radius: 18px; }
-  .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 30px; }
-  .mini-grid a { overflow: hidden; border-radius: 12px; }
-  .mini-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform .3s var(--ease); }
+  .artist-hero p { max-width: 480px; margin: 24px 0 30px; color: #c9c2b8; font-size: 1.1rem; }
+  .artist-story { display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(45px, 8vw, 110px); align-items: center; }
+  .artist-story figure { margin: 0; overflow: hidden; }
+  .artist-story figure img { width: 100%; max-height: 650px; object-fit: cover; object-position: center 36%; }
+  .artist-collage { width: min(100%, 380px); margin-top: 28px; aspect-ratio: 1; object-fit: cover; }
+  .mini-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 105px; gap: 10px; margin-top: 30px; }
+  .mini-grid a { grid-column: span 4; grid-row: span 4; overflow: hidden; }
+  .mini-grid a:nth-child(2), .mini-grid a:nth-child(5) { grid-row: span 5; }
+  .mini-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s var(--ease); }
   .mini-grid a:hover img { transform: scale(1.035); }
-  @media (max-width: 760px) { .artist-hero__shade { background: linear-gradient(0deg, rgba(5,5,5,.94), rgba(5,5,5,.18)); } .artist-story, .artist-editorial { grid-template-columns: 1fr; } }
+  @keyframes portrait-reveal { to { clip-path: inset(0); } }
+  @media (max-width: 760px) { .artist-hero__grid { min-height: 0; grid-template-columns: 1fr; padding-block: 54px 0; } .artist-hero__portrait { height: min(58svh, 480px); } .artist-hero__portrait img { max-height: none; } .artist-story { grid-template-columns: 1fr; } .artist-story figure img { max-height: 440px; } .mini-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 205px; gap: 8px; } .mini-grid a, .mini-grid a:nth-child(n) { grid-column: auto; grid-row: auto; } .artist-collage { width: min(100%, 320px); } }
 </style>

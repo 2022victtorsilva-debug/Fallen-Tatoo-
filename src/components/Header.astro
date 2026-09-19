@@ -34,12 +34,17 @@ const pathname = Astro.url.pathname;
   </div>
 
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <nav aria-label="Navegação mobile">
+    <button class="mobile-menu__backdrop" type="button" aria-label="Fechar menu" tabindex="-1"></button>
+    <div class="mobile-menu__panel">
+      <div class="mobile-menu__top"><span>Menu</span></div>
+      <nav aria-label="Navegação mobile">
       {links.map(([href, label], index) => (
-        <a href={url(href)} style={`--i:${index}`}>{label}</a>
+        <a href={url(href)} style={`--i:${index}`} aria-current={pathname.includes(href) ? 'page' : undefined}>{label}</a>
       ))}
       <a class="button" href={studio.whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento</a>
-    </nav>
+      </nav>
+      <p>Centro Histórico · Salvador</p>
+    </div>
   </div>
 </header>
 
@@ -60,6 +65,8 @@ const pathname = Astro.url.pathname;
   };
 
   toggle?.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelector('.mobile-menu__backdrop')?.addEventListener('click', () => setMenu(false));
+  menu?.querySelector('.mobile-menu__close')?.addEventListener('click', () => setMenu(false));
   menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') setMenu(false);

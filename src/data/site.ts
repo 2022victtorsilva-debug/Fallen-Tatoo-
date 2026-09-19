@@ -22,11 +22,11 @@ export const portfolio = [
 ];
 
 export const services = [
-  { title: 'Nova tatuagem personalizada', text: 'Da referência inicial à composição final, o projeto é pensado para a região do corpo, o tamanho e o estilo desejado.', image: portfolio[0] },
-  { title: 'Continuação e finalização', text: 'Avaliação do trabalho existente para planejar uma continuidade coerente de linhas, composição e acabamento.', image: portfolio[3] },
-  { title: 'Cobertura e transformação', text: 'Análise prévia da tatuagem atual e das possibilidades reais de cover-up ou retrabalho antes do orçamento.', image: portfolio[1] },
-  { title: 'Reforma e revitalização', text: 'Retrabalho de linhas, contraste e leitura visual de tatuagens que precisam de nova definição.', image: portfolio[2] },
-  { title: 'Fechamento de regiões corporais', text: 'Planejamento de composições maiores para conectar elementos e aproveitar a anatomia da região.', image: portfolio[4] }
+  { title: 'Nova tatuagem personalizada', text: 'Referência, tamanho, região do corpo e estilo são avaliados antes do desenho.', image: portfolio[0] },
+  { title: 'Continuação e finalização', text: 'Avaliação do trabalho existente para planejar linhas e acabamento.', image: portfolio[3] },
+  { title: 'Cobertura e transformação', text: 'Análise da tattoo atual e das possibilidades de cobertura ou retrabalho.', image: portfolio[1] },
+  { title: 'Reforma e revitalização', text: 'Reforço de linhas, contraste e definição em trabalhos antigos.', image: portfolio[2] },
+  { title: 'Fechamento de regiões corporais', text: 'Composições maiores planejadas para a anatomia da região.', image: portfolio[4] }
 ];
 
 export const styles = [
@@ -34,8 +34,8 @@ export const styles = [
   { title: 'Fine line, lettering e delicadas', text: 'Linhas finas, elementos leves e composições tipográficas.', image: portfolio[3] },
   { title: 'Realismo e preto e cinza', text: 'Volume, contraste e profundidade construídos sem depender da cor.', image: portfolio[2] },
   { title: 'Anime e geek', text: 'Personagens e referências visuais reinterpretados para a pele.', image: portfolio[5] },
-  { title: 'Geométrico e moderno', text: 'Geometria, ritmo e contraste integrados à anatomia.', image: portfolio[4] },
-  { title: 'Colorida e tradicional', text: 'Cor, contorno e presença gráfica em composições expressivas.', image: portfolio[6] }
+  { title: 'Geométrico e composições modernas', text: 'Geometria e contraste ajustados à anatomia.', image: portfolio[4] },
+  { title: 'Coloridas e autorais', text: 'Cor, contorno e desenhos de leitura marcante.', image: portfolio[6] }
 ];
 
 export const faqs = [
