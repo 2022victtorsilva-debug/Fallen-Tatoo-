@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { studio } from '../data/site';
+---
+<BaseLayout title="Política de privacidade" description="Política de privacidade do site da Fallen Tattoo Studio e informações sobre links externos e dados enviados pelo WhatsApp.">
+  <PageHero eyebrow="Privacidade" title="Clareza sobre os dados neste site." description="A política abaixo reflete a implementação atual: páginas informativas, sem formulário, login, conta de usuário ou publicidade comportamental." />
+  <section class="section"><div class="narrow prose">
+    <p class="note">Este site não possui formulário próprio, área de login, criação de conta, upload de arquivos ou pagamento online. O contato para orçamento acontece em serviços externos escolhidos pelo visitante.</p>
+    <h2>1. Navegação no site</h2><p>As páginas podem ser acessadas sem fornecer nome, telefone, e-mail ou outros dados diretamente à Fallen. O site não utiliza cookies publicitários nem cria perfis de navegação para marketing.</p>
+    <h2>2. Links e serviços externos</h2><p>Os botões de WhatsApp, Instagram e Google Maps levam a serviços de terceiros. Ao abrir esses links, o tratamento de dados passa a seguir as políticas e configurações da respectiva plataforma.</p>
+    <h2>3. Orçamentos pelo WhatsApp</h2><p>Se você iniciar uma conversa pelo WhatsApp, os dados e materiais que decidir enviar — como nome, telefone, referências, região do corpo e tamanho aproximado — serão usados para responder ao contato, avaliar o projeto e organizar o atendimento.</p>
+    <h2>4. Dados relacionados ao atendimento presencial</h2><p>Quando o serviço é contratado, a Fallen pode precisar de dados cadastrais, documentos, informações de saúde relevantes e registros do procedimento para executar o atendimento e cumprir obrigações legais e sanitárias. Esses dados não são coletados por este site.</p>
+    <h2>5. Imagens de trabalhos</h2><p>As fotografias exibidas compõem o portfólio do estúdio. A política de autorização, divulgação e pedido de sigilo é tratada nos <a href="../termos/">Termos</a> e nos documentos do atendimento.</p>
+    <h2>6. Direitos e contato</h2><p>Pedidos de acesso, correção, bloqueio, anonimização ou eliminação de dados podem ser encaminhados pelos canais oficiais, observadas as hipóteses legais de retenção. Para falar com a Fallen, use o WhatsApp <a href={studio.whatsapp} target="_blank" rel="noreferrer">{studio.phone}</a>.</p>
+    <h2>7. Atualizações</h2><p>Esta política pode ser atualizada quando a implementação do site ou as práticas de atendimento mudarem. A versão publicada nesta página é a referência atual.</p>
+  </div></section>
+</BaseLayout>

@@ -1,0 +1,20 @@
+---
+import { url } from '../lib/paths';
+import { studio } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-top wrap">
+    <div class="footer-brand">
+      <img src={url('/images/01-brand-logo-fallen.png')} width="64" height="64" alt="Símbolo da Fallen Tattoo Studio" loading="lazy" />
+      <div><strong>Fallen Tattoo Studio</strong><p>Tatuagem em Salvador, no Centro Histórico.</p></div>
+    </div>
+    <div class="footer-links">
+      <div><span>Explore</span><a href={url('/portfolio/')}>Portfólio</a><a href={url('/artistas/')}>Artistas</a><a href={url('/servicos/')}>Serviços</a><a href={url('/blog/')}>Blog</a></div>
+      <div><span>Visite</span><a href={url('/contato/')}>Contato e localização</a><a href={studio.maps} target="_blank" rel="noreferrer">Abrir no Google Maps</a><a href={studio.instagram} target="_blank" rel="noreferrer">Instagram</a></div>
+      <div><span>Informações</span><a href={url('/faq/')}>Dúvidas frequentes</a><a href={url('/termos/')}>Termos</a><a href={url('/privacidade/')}>Privacidade</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom wrap"><span>© {year} Fallen Tattoo Studio</span><span>{studio.address}</span></div>
+</footer>

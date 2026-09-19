@@ -1,0 +1,10 @@
+---
+import { studio } from '../data/site';
+import { url } from '../lib/paths';
+interface Props { title?: string; text?: string; }
+const { title = 'Seu projeto começa com uma conversa.', text = 'Envie sua ideia, a região do corpo, o tamanho aproximado e o estilo desejado. O orçamento é personalizado.' } = Astro.props;
+---
+<div class="cta-band" data-reveal>
+  <div><span class="eyebrow">Orçamento</span><h2>{title}</h2><p>{text}</p></div>
+  <div class="button-row"><a class="button" href={studio.whatsapp} target="_blank" rel="noreferrer">Falar pelo WhatsApp</a><a class="button button--ghost" href={url('/portfolio/')}>Ver portfólio</a></div>
+</div>

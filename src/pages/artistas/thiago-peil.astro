@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { studio } from '../../data/site';
+import { url } from '../../lib/paths';
+---
+<BaseLayout title="Thiago Peil" description="Conheça Thiago Peil na Fallen Tattoo Studio por meio da colagem de trabalhos fornecida para o artista.">
+  <section class="thiago-hero">
+    <div class="wrap thiago-grid">
+      <div class="thiago-copy"><span class="eyebrow">Artista — Fallen Tattoo Studio</span><h1>Thiago<br/><em>Peil</em></h1><p class="lede">A apresentação usa a colagem confirmada de Thiago: retrato, desenhos e trabalhos reunidos em uma única peça visual.</p><div class="button-row"><a class="button" href={studio.whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento</a><a class="button button--ghost" href={url('/portfolio/')}>Ver portfólio</a></div></div>
+      <div class="thiago-visual"><span aria-hidden="true">THIAGO PEIL</span><img src={url('/images/13-artist-thiago-collage.webp')} alt="Colagem de retrato, desenhos e tatuagens de Thiago Peil" width="1536" height="1536" fetchpriority="high" /></div>
+    </div>
+  </section>
+  <section class="section section--line"><div class="narrow" data-reveal><span class="eyebrow">Sem preencher lacunas</span><h2>O trabalho é a apresentação.</h2><p class="lede">Não há um retrato individual adicional ou uma biografia confirmada no material do projeto. Por isso, esta página mantém o foco na peça visual fornecida e nos canais de contato da Fallen.</p></div></section>
+  <section class="section"><div class="wrap"><CtaBand title="Quer conversar sobre um projeto com Thiago?" /></div></section>
+</BaseLayout>
+<style>
+  .thiago-hero { min-height: calc(100svh - 74px); display: flex; align-items: center; padding-block: 80px; overflow: hidden; }
+  .thiago-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
+  .thiago-copy h1 em { color: var(--gold-bright); font-weight: 400; }
+  .thiago-copy p { margin-block: 26px; }
+  .thiago-visual { position: relative; }
+  .thiago-visual img { position: relative; z-index: 1; border-radius: 18px; box-shadow: 0 40px 100px rgba(0,0,0,.4); }
+  .thiago-visual > span { position: absolute; top: 50%; left: -8%; color: rgba(174,135,82,.1); font-family: var(--serif); font-size: clamp(5rem, 13vw, 12rem); line-height: .8; white-space: nowrap; transform: rotate(-8deg); }
+  @media (max-width: 760px) { .thiago-grid { grid-template-columns: 1fr; } .thiago-copy { order: 2; } }
+</style>

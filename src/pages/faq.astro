@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { faqs } from '../data/site';
+const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })) };
+---
+<BaseLayout title="Dúvidas frequentes" description="Respostas sobre cicatrização, cuidados, tons de pele, natação, cores, tamanho, orçamento e agendamento de tatuagens.">
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <PageHero eyebrow="FAQ" title="Perguntas antes e depois da tattoo." description="Respostas organizadas a partir das dúvidas já publicadas pela Fallen e das informações práticas para orçamento e agendamento." />
+  <section class="section"><div class="narrow"><FAQAccordion /></div></section>
+  <section class="section section--line"><div class="wrap"><CtaBand title="Ainda ficou alguma dúvida?" text="Fale diretamente com a equipe pelo WhatsApp antes de agendar." /></div></section>
+</BaseLayout>

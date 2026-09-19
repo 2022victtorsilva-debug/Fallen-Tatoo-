@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { posts } from '../../data/site';
+import { url } from '../../lib/paths';
+---
+<BaseLayout title="Blog" description="Artigos da Fallen Tattoo Studio sobre história da tatuagem, cuidados, dor e orçamento.">
+  <PageHero eyebrow="Blog" title="Informação útil, sem encher espaço." description="Quatro temas já presentes na publicação da Fallen, reorganizados para leitura clara e conectados às dúvidas reais de quem pensa em tatuar." />
+  <section class="section">
+    <div class="wrap blog-grid">
+      {posts.map((post, index) => (
+        <article class={`post-card card post-${index + 1}`} data-reveal>
+          <a class="post-card__image" href={url(`/blog/${post.slug}/`)}><img src={post.image.src} alt={post.image.alt} width={post.image.width} height={post.image.height} loading={index < 2 ? 'eager' : 'lazy'} /></a>
+          <div class="card__body"><span class="card__meta">{post.date}</span><h2><a href={url(`/blog/${post.slug}/`)}>{post.title}</a></h2><p>{post.excerpt}</p><a class="text-link" href={url(`/blog/${post.slug}/`)}>Ler artigo</a></div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="section section--line"><div class="wrap"><CtaBand /></div></section>
+</BaseLayout>
+<style>
+  .blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .post-card__image { display: block; aspect-ratio: 16 / 10; overflow: hidden; }
+  .post-card__image img { width: 100%; height: 100%; object-fit: cover; }
+  .post-card h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); }
+  .post-card p { color: var(--muted); }
+  @media (max-width: 700px) { .blog-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { terms } from '../data/site';
+---
+<BaseLayout title="Termos" description="Termos de serviço da Fallen Tattoo Studio: agendamento, pagamentos, cancelamentos, saúde, biossegurança, cuidados e direitos.">
+  <PageHero eyebrow="Termos" title="Condições para atendimento e tatuagem." description="Conteúdo reorganizado a partir dos termos públicos da Fallen, mantendo os pontos materiais em uma estrutura de leitura mais clara." />
+  <section class="section">
+    <div class="wrap legal-layout">
+      <nav class="legal-index" aria-label="Índice dos termos"><strong>Nesta página</strong>{terms.map((item) => <a href={`#${item.id}`}>{item.title}</a>)}</nav>
+      <div class="prose"><p class="note">Estes termos se aplicam ao agendamento, à criação de arte e à execução de tatuagens. Em caso de dúvida sobre uma condição específica, confirme pelos canais oficiais antes de agendar.</p>{terms.map((item) => <section class="legal-section" id={item.id}><h2>{item.title}</h2><p>{item.body}</p></section>)}</div>
+    </div>
+  </section>
+</BaseLayout>

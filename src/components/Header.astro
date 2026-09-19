@@ -1,0 +1,70 @@
+---
+import { url } from '../lib/paths';
+import { studio } from '../data/site';
+
+const links = [
+  ['/portfolio/', 'Portfólio'],
+  ['/artistas/', 'Artistas'],
+  ['/servicos/', 'Serviços'],
+  ['/faq/', 'FAQ'],
+  ['/blog/', 'Blog'],
+  ['/contato/', 'Contato']
+];
+const pathname = Astro.url.pathname;
+---
+
+<header class="site-header" data-header>
+  <div class="nav-shell">
+    <a class="brand" href={url('/')} aria-label="Fallen Tattoo Studio — início">
+      <img src={url('/images/01-brand-logo-fallen.png')} width="48" height="48" alt="" />
+      <span>Fallen <small>Tattoo Studio</small></span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      {links.map(([href, label]) => (
+        <a href={url(href)} aria-current={pathname.includes(href) ? 'page' : undefined}>{label}</a>
+      ))}
+    </nav>
+
+    <a class="button button--compact header-cta" href={studio.whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento</a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav aria-label="Navegação mobile">
+      {links.map(([href, label], index) => (
+        <a href={url(href)} style={`--i:${index}`}>{label}</a>
+      ))}
+      <a class="button" href={studio.whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('[data-header]');
+  const toggle = header?.querySelector('.menu-toggle');
+  const menu = header?.querySelector('.mobile-menu');
+
+  const setMenu = (open) => {
+    if (!(toggle instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    menu.setAttribute('aria-hidden', String(!open));
+    header?.classList.toggle('menu-open', open);
+    document.body.classList.toggle('nav-open', open);
+    if (open) menu.querySelector('a')?.focus();
+    else toggle.focus();
+  };
+
+  toggle?.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') setMenu(false);
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900 && toggle?.getAttribute('aria-expanded') === 'true') setMenu(false);
+  });
+</script>

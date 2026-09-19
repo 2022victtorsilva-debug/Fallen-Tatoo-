@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { posts } from '../../data/site';
+import { url } from '../../lib/paths';
+
+export function getStaticPaths() {
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+const { post } = Astro.props;
+---
+<BaseLayout title={post.title} description={post.excerpt} image={post.image.src}>
+  <article>
+    <header class="article-hero">
+      <img src={post.image.src} alt={post.image.alt} width={post.image.width} height={post.image.height} fetchpriority="high" />
+      <div class="article-hero__shade"></div>
+      <div class="wrap article-hero__content"><div class="breadcrumb"><a href={url('/')}>Início</a> / <a href={url('/blog/')}>Blog</a></div><span class="eyebrow">{post.date}</span><h1>{post.title}</h1><p>{post.excerpt}</p></div>
+    </header>
+    <div class="section"><div class="narrow prose"><p class="lede">{post.intro}</p>{post.sections.map(([title, body]) => <section><h2>{title}</h2><p>{body}</p></section>)}<p class="note">Este conteúdo é informativo. Em cuidados de cicatrização, siga a orientação do profissional que realizou sua tatuagem; diante de sinais de complicação, procure atendimento médico.</p></div></div>
+  </article>
+  <section class="section section--line"><div class="wrap"><CtaBand /></div></section>
+</BaseLayout>
+<style>
+  .article-hero { position: relative; min-height: 720px; display: flex; align-items: flex-end; overflow: hidden; }
+  .article-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .article-hero__shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(5,5,5,.98) 2%, rgba(5,5,5,.45) 70%, rgba(5,5,5,.18)); }
+  .article-hero__content { position: relative; padding-block: 120px 60px; }
+  .article-hero h1 { max-width: 1000px; font-size: clamp(3rem, 7vw, 6.5rem); }
+  .article-hero p { max-width: 680px; margin-top: 22px; color: #d0c9bf; font-size: 1.1rem; }
+</style>

@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { portfolio } from '../data/site';
+---
+<BaseLayout title="Portfólio" description="Portfólio de tatuagens da Fallen Tattoo Studio em Salvador: blackwork, realismo, fine line, anime, geométrico e trabalhos coloridos.">
+  <PageHero eyebrow="Portfólio" title="Trabalhos para ver sem pressa." description="Uma seleção de tatuagens reais do pacote da Fallen. Use os filtros para explorar as linguagens e abra qualquer imagem em tela ampliada." />
+  <section class="section">
+    <div class="wrap">
+      <div class="portfolio-filters" role="group" aria-label="Filtrar portfólio">
+        <button type="button" class="active" data-filter="Todos">Todos</button>
+        {[...new Set(portfolio.map((item) => item.style))].map((style) => <button type="button" data-filter={style}>{style}</button>)}
+      </div>
+      <div class="portfolio-grid" data-gallery>
+        {portfolio.map((item, index) => (
+          <button class={`portfolio-item p-${index + 1}`} type="button" data-style={item.style} data-index={index} aria-label={`Ampliar: ${item.alt}`}>
+            <img src={item.src} alt={item.alt} width={item.width} height={item.height} loading={index < 2 ? 'eager' : 'lazy'} />
+            <span>{item.style}<i aria-hidden="true">↗</i></span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section section--line"><div class="wrap"><CtaBand title="Encontrou uma direção para o seu projeto?" /></div></section>
+
+  <dialog class="lightbox" aria-label="Visualização ampliada do portfólio">
+    <button class="lightbox-close" type="button" aria-label="Fechar imagem">×</button>
+    <button class="lightbox-prev" type="button" aria-label="Imagem anterior">←</button>
+    <figure><img src="" alt="" /><figcaption></figcaption></figure>
+    <button class="lightbox-next" type="button" aria-label="Próxima imagem">→</button>
+  </dialog>
+
+  <script define:vars={{ items: portfolio }}>
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    const galleryItems = document.querySelectorAll('.portfolio-item');
+    filterButtons.forEach((button) => button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+      filterButtons.forEach((candidate) => candidate.classList.toggle('active', candidate === button));
+      galleryItems.forEach((item) => {
+        const show = filter === 'Todos' || item.getAttribute('data-style') === filter;
+        item.toggleAttribute('hidden', !show);
+      });
+    }));
+
+    const dialog = document.querySelector('.lightbox');
+    const lightboxImage = dialog?.querySelector('img');
+    const caption = dialog?.querySelector('figcaption');
+    let current = 0;
+    let previousFocus;
+    const render = (index) => {
+      current = (index + items.length) % items.length;
+      if (lightboxImage instanceof HTMLImageElement) { lightboxImage.src = items[current].src; lightboxImage.alt = items[current].alt; }
+      if (caption) caption.textContent = items[current].style;
+    };
+    galleryItems.forEach((button) => button.addEventListener('click', () => {
+      if (!(dialog instanceof HTMLDialogElement)) return;
+      previousFocus = button;
+      render(Number(button.getAttribute('data-index')));
+      dialog.showModal();
+      dialog.querySelector('.lightbox-close')?.focus();
+    }));
+    const close = () => { if (dialog instanceof HTMLDialogElement) dialog.close(); };
+    dialog?.querySelector('.lightbox-close')?.addEventListener('click', close);
+    dialog?.querySelector('.lightbox-prev')?.addEventListener('click', () => render(current - 1));
+    dialog?.querySelector('.lightbox-next')?.addEventListener('click', () => render(current + 1));
+    dialog?.addEventListener('click', (event) => { if (event.target === dialog) close(); });
+    dialog?.addEventListener('close', () => previousFocus?.focus());
+    window.addEventListener('keydown', (event) => {
+      if (!(dialog instanceof HTMLDialogElement) || !dialog.open) return;
+      if (event.key === 'ArrowLeft') render(current - 1);
+      if (event.key === 'ArrowRight') render(current + 1);
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .portfolio-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 34px; }
+  .portfolio-filters button { border: 1px solid var(--line); border-radius: 999px; padding: 10px 15px; background: transparent; color: var(--muted); cursor: pointer; font-size: .76rem; font-weight: 750; }
+  .portfolio-filters button:hover, .portfolio-filters button.active { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+  .portfolio-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 90px; gap: 16px; }
+  .portfolio-item { position: relative; grid-column: span 4; grid-row: span 6; overflow: hidden; border: 0; border-radius: 16px; padding: 0; background: #111; cursor: zoom-in; text-align: left; transition: transform 280ms var(--ease); }
+  .portfolio-item:nth-child(3n+2) { grid-row: span 5; }
+  .portfolio-item:nth-child(4n) { grid-column: span 5; }
+  .portfolio-item:nth-child(5n) { grid-column: span 3; }
+  .portfolio-item:hover { transform: translateY(-6px) scale(1.015); }
+  .portfolio-item.is-pressed { transform: scale(.985); }
+  .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .32s var(--ease); }
+  .portfolio-item:hover img { transform: scale(1.03); }
+  .portfolio-item span { position: absolute; inset: auto 0 0; display: flex; justify-content: space-between; padding: 44px 18px 17px; background: linear-gradient(0deg, rgba(0,0,0,.85), transparent); font-size: .76rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .portfolio-item[hidden] { display: none; }
+  .lightbox { width: 100vw; max-width: none; height: 100dvh; max-height: none; border: 0; padding: 30px; background: rgba(4,4,4,.96); color: white; }
+  .lightbox::backdrop { background: rgba(0,0,0,.92); }
+  .lightbox[open] { display: grid; grid-template-columns: 64px 1fr 64px; align-items: center; }
+  .lightbox figure { display: grid; place-items: center; margin: 0; min-width: 0; height: calc(100dvh - 60px); }
+  .lightbox img { max-width: 100%; max-height: calc(100dvh - 110px); object-fit: contain; }
+  .lightbox figcaption { margin-top: 10px; color: var(--muted); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; }
+  .lightbox button { width: 48px; height: 48px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; background: rgba(0,0,0,.35); cursor: pointer; font-size: 1.35rem; }
+  .lightbox-close { position: fixed; top: 20px; right: 20px; z-index: 2; }
+  @media (max-width: 900px) { .portfolio-item, .portfolio-item:nth-child(n) { grid-column: span 6; grid-row: span 5; } }
+  @media (max-width: 640px) { .portfolio-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 240px; gap: 10px; } .portfolio-item, .portfolio-item:nth-child(n) { grid-column: auto; grid-row: auto; border-radius: 12px; } .portfolio-item:nth-child(3n+1) { grid-column: 1 / -1; } .lightbox { padding: 14px; } .lightbox[open] { grid-template-columns: 44px 1fr 44px; } .lightbox button { width: 40px; height: 40px; } }
+</style>

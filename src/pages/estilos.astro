@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { styles } from '../data/site';
+import { url } from '../lib/paths';
+---
+<BaseLayout title="Estilos" description="Estilos presentes no portfólio da Fallen Tattoo Studio: blackwork, fine line, realismo, anime, geométrico e tatuagens coloridas.">
+  <PageHero eyebrow="Estilos" title="Linguagens presentes no portfólio." description="Os nomes ajudam a organizar referências. O projeto final nasce do encontro entre a ideia, a anatomia e a leitura visual do desenho." />
+  <section class="section">
+    <div class="wrap styles-grid">
+      {styles.map((style, index) => (
+        <article class="style-card card" data-reveal>
+          <div class="style-card__visual"><img src={style.image.src} alt={style.image.alt} width={style.image.width} height={style.image.height} loading={index < 2 ? 'eager' : 'lazy'} /><span>0{index + 1}</span></div>
+          <div class="card__body"><h2>{style.title}</h2><p>{style.text}</p><a class="text-link" href={url('/portfolio/')}>Ver no portfólio</a></div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="section section--line"><div class="wrap"><CtaBand title="Tem uma referência, mas ainda não sabe o nome do estilo?" text="Envie a imagem e explique o que você gosta nela. A conversa pode começar sem um rótulo pronto." /></div></section>
+</BaseLayout>
+<style>
+  .styles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .style-card__visual { position: relative; aspect-ratio: 16 / 11; overflow: hidden; }
+  .style-card__visual img { width: 100%; height: 100%; object-fit: cover; }
+  .style-card__visual span { position: absolute; top: 18px; left: 18px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(5,5,5,.8); color: var(--gold-bright); font-family: var(--serif); }
+  .style-card h2 { font-size: clamp(1.8rem, 4vw, 3.2rem); }
+  .style-card p { color: var(--muted); }
+  @media (max-width: 700px) { .styles-grid { grid-template-columns: 1fr; } }
+</style>

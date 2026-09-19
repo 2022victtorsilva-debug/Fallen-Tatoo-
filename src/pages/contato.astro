@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { studio } from '../data/site';
+import { url } from '../lib/paths';
+---
+<BaseLayout title="Contato e localização" description="Fale com a Fallen Tattoo Studio pelo WhatsApp, veja o endereço no Centro Histórico de Salvador e abra a rota no Google Maps.">
+  <PageHero eyebrow="Contato" title="Orçamento e localização, sem rodeios." description="Envie as informações básicas do projeto pelo WhatsApp ou use o mapa para encontrar o estúdio no Centro Histórico de Salvador." />
+  <section class="section">
+    <div class="wrap contact-grid">
+      <div class="contact-panel" data-reveal>
+        <span class="eyebrow">Solicitar orçamento</span><h2>O que enviar.</h2><ol><li><span>01</span>Ideia ou imagem de referência</li><li><span>02</span>Região do corpo</li><li><span>03</span>Tamanho aproximado</li><li><span>04</span>Estilo desejado, se souber</li></ol><a class="button" href={studio.whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento pelo WhatsApp</a>
+      </div>
+      <div class="contact-cards" data-reveal>
+        <a href={studio.whatsapp} target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>{studio.phone}</strong><em>Conversar ↗</em></a>
+        <a href={studio.instagram} target="_blank" rel="noreferrer"><span>Instagram</span><strong>@fallentattoostudio</strong><em>Abrir perfil ↗</em></a>
+        <a href={studio.maps} target="_blank" rel="noreferrer"><span>Endereço</span><strong>{studio.address}</strong><em>Abrir no Maps ↗</em></a>
+      </div>
+    </div>
+  </section>
+  <section class="map-section">
+    <iframe title="Mapa da Fallen Tattoo Studio no Centro Histórico de Salvador" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Ed.%20Santa%20Cruz%20Rua%20do%20Tesouro%2056%20Centro%20Hist%C3%B3rico%20Salvador%20BA%2040020-056&output=embed"></iframe>
+    <div class="map-card"><img src={url('/images/14-studio-interior-fallen.webp')} alt="Interior da Fallen Tattoo Studio" width="1536" height="1536" loading="lazy" /><div><span class="eyebrow">Fallen Tattoo Studio</span><h2>Ed. Santa Cruz</h2><p>{studio.address}</p><a class="button" href={studio.maps} target="_blank" rel="noreferrer">Abrir rota</a></div></div>
+  </section>
+</BaseLayout>
+<style>
+  .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 24px; }
+  .contact-panel { padding: clamp(30px, 6vw, 64px); border: 1px solid rgba(174,135,82,.35); border-radius: 20px; background: radial-gradient(circle at 100% 0, rgba(89,20,29,.28), transparent 40%), var(--surface); }
+  .contact-panel ol { list-style: none; margin: 32px 0; padding: 0; border-top: 1px solid var(--line); }
+  .contact-panel li { display: grid; grid-template-columns: 44px 1fr; gap: 10px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+  .contact-panel li span { color: var(--gold-bright); font-family: var(--serif); }
+  .contact-cards { display: grid; gap: 12px; }
+  .contact-cards a { display: grid; grid-template-columns: 120px 1fr auto; align-items: center; gap: 20px; min-height: 132px; padding: 24px 28px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); transition: transform .28s var(--ease), border-color .28s ease; }
+  .contact-cards a:hover { transform: translateY(-4px); border-color: rgba(211,179,124,.45); }
+  .contact-cards span { color: var(--gold-bright); font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .contact-cards strong { font-family: var(--serif); font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 400; }
+  .contact-cards em { color: var(--muted); font-size: .8rem; font-style: normal; }
+  .map-section { position: relative; min-height: 720px; }
+  .map-section iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(1) invert(.9) contrast(.83); }
+  .map-card { position: relative; z-index: 1; top: 70px; left: max(20px, calc((100vw - 1180px) / 2)); width: min(430px, calc(100vw - 40px)); overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: #0c0c0c; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+  .map-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .map-card div { padding: 28px; }
+  .map-card h2 { font-size: 2.5rem; }
+  .map-card p { color: var(--muted); }
+  @media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; } .contact-cards a { grid-template-columns: 1fr; gap: 7px; } .map-card { left: 20px; } }
+</style>
