@@ -58,8 +58,6 @@ const jsonLd = {
     <div class="ambient" aria-hidden="true">
       <span class="ambient__light ambient__light--gold"></span>
       <span class="ambient__light ambient__light--wine"></span>
-      <span class="ambient__light ambient__light--smoke"></span>
-      <span class="ambient__grain"></span>
     </div>
     <Header />
     <main id="conteudo"><slot /></main>
@@ -69,43 +67,28 @@ const jsonLd = {
     </a>
     <script>
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+      const revealNodes = document.querySelectorAll('[data-reveal]');
+      if (reducedMotion || !('IntersectionObserver' in window)) {
+        revealNodes.forEach((node) => node.classList.add('is-visible'));
+      } else {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
             entry.target.classList.add('is-visible');
             revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
-      document.querySelectorAll('[data-reveal]').forEach((node) => revealObserver.observe(node));
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -4% 0px' });
+        revealNodes.forEach((node) => revealObserver.observe(node));
+      }
 
-      document.querySelectorAll('.card, .portfolio-item, [data-interactive-card]').forEach((card) => {
-        card.addEventListener('pointerdown', () => card.classList.add('is-pressed'));
-        ['pointerup', 'pointercancel', 'pointerleave'].forEach((event) => card.addEventListener(event, () => card.classList.remove('is-pressed')));
-
-        if (reducedMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-        card.addEventListener('pointermove', (event) => {
-          if (!(card instanceof HTMLElement) || !(event instanceof PointerEvent)) return;
-          const rect = card.getBoundingClientRect();
-          const x = (event.clientX - rect.left) / rect.width;
-          const y = (event.clientY - rect.top) / rect.height;
-          card.style.setProperty('--rx', `${(0.5 - y) * 5}deg`);
-          card.style.setProperty('--ry', `${(x - 0.5) * 6}deg`);
-          card.style.setProperty('--mx', `${x * 100}%`);
-          card.style.setProperty('--my', `${y * 100}%`);
-          card.style.setProperty('--ix', `${(x - 0.5) * 8}px`);
-          card.style.setProperty('--iy', `${(y - 0.5) * 8}px`);
-          card.classList.add('is-tilting');
-        });
-        card.addEventListener('pointerleave', () => {
-          if (!(card instanceof HTMLElement)) return;
-          card.style.setProperty('--rx', '0deg');
-          card.style.setProperty('--ry', '0deg');
-          card.style.setProperty('--ix', '0px');
-          card.style.setProperty('--iy', '0px');
-          card.classList.remove('is-tilting');
-        });
-      });
+      const interactiveSelector = '.card, .portfolio-item, [data-interactive-card]';
+      const releasePressed = () => document.querySelector('.is-pressed')?.classList.remove('is-pressed');
+      document.addEventListener('pointerdown', (event) => {
+        if (!(event.target instanceof Element)) return;
+        event.target.closest(interactiveSelector)?.classList.add('is-pressed');
+      }, { passive: true });
+      document.addEventListener('pointerup', releasePressed, { passive: true });
+      document.addEventListener('pointercancel', releasePressed, { passive: true });
     </script>
   </body>
 </html>

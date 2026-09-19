@@ -8,7 +8,7 @@ import { url } from '../../lib/paths';
   <section class="thiago-hero">
     <div class="wrap thiago-grid">
       <div class="thiago-copy"><span class="eyebrow">Artista da Fallen</span><h1>Thiago<br/><em>Peil</em></h1><p class="lede">Conheça trabalhos e desenhos reunidos por Thiago Peil.</p><div class="button-row"><a class="button" href={studio.whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento</a><a class="button button--ghost" href={url('/portfolio/')}>Ver portfólio</a></div></div>
-      <div class="thiago-visual"><img src={url('/images/13-artist-thiago-collage.webp')} alt="Colagem de retrato, desenhos e tatuagens de Thiago Peil" width="1536" height="1536" fetchpriority="high" /></div>
+      <div class="thiago-visual"><img src={url('/images/13-artist-thiago-collage.webp')} alt="Colagem de retrato, desenhos e tatuagens de Thiago Peil" width="1536" height="1536" fetchpriority="high" decoding="async" /></div>
     </div>
   </section>
   <section class="section section--line"><div class="narrow" data-reveal="left"><span class="eyebrow">Trabalhos</span><h2>Desenhos e tatuagens.</h2><p class="lede">A colagem reúne referências, estudos e trabalhos de Thiago. Para saber sobre disponibilidade e orçamento, fale diretamente com a Fallen.</p></div></section>
@@ -20,7 +20,7 @@ import { url } from '../../lib/paths';
   .thiago-copy h1 em { color: var(--gold-bright); font-weight: 400; }
   .thiago-copy p { margin-block: 26px; }
   .thiago-visual { position: relative; }
-  .thiago-visual img { position: relative; z-index: 1; width: 100%; max-height: 650px; object-fit: cover; border-radius: 3px; box-shadow: 0 40px 100px rgba(0,0,0,.4); clip-path: inset(0 100% 0 0); animation: thiago-reveal .8s .12s var(--ease) forwards; }
+  .thiago-visual img { position: relative; z-index: 1; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; border-radius: 3px; box-shadow: 0 30px 70px rgba(0,0,0,.34); clip-path: inset(0 100% 0 0); animation: thiago-reveal .68s .1s var(--ease) forwards; }
   @keyframes thiago-reveal { to { clip-path: inset(0); } }
-  @media (max-width: 760px) { .thiago-hero { min-height: 0; padding-block: 54px; } .thiago-grid { grid-template-columns: 1fr; } .thiago-visual img { max-height: 440px; } }
+  @media (max-width: 760px) { .thiago-hero { min-height: 0; padding-block: 54px; } .thiago-grid { grid-template-columns: 1fr; } .thiago-visual { width: min(100%, 390px); margin-inline: auto; } }
 </style>

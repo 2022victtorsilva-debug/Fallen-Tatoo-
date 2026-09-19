@@ -71,7 +71,7 @@ const pathname = Astro.url.pathname;
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') setMenu(false);
   });
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 900 && toggle?.getAttribute('aria-expanded') === 'true') setMenu(false);
+  window.matchMedia('(min-width: 901px)').addEventListener('change', (event) => {
+    if (event.matches && toggle?.getAttribute('aria-expanded') === 'true') setMenu(false);
   });
 </script>

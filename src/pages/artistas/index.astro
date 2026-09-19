@@ -12,8 +12,8 @@ import { url } from '../../lib/paths';
         <img src={url('/images/11-artist-vinicius-machine-portrait.webp')} alt="Vinícius Medrado segurando uma máquina de tatuagem" width="1235" height="1536" />
         <div><span class="eyebrow">Vinícius Medrado</span><h2>Retratos e trabalhos.</h2><p>Veja a seleção de tatuagens e o Instagram do artista.</p><em>Ver página do artista</em></div>
       </a>
-      <a class="artist-feature artist-feature--reverse" href={url('/artistas/thiago-peil/')} data-reveal>
-        <img src={url('/images/13-artist-thiago-collage.webp')} alt="Colagem com retrato e trabalhos de Thiago Peil" width="1536" height="1536" loading="lazy" />
+      <a class="artist-feature artist-feature--reverse artist-feature--collage" href={url('/artistas/thiago-peil/')} data-reveal>
+        <img src={url('/images/13-artist-thiago-collage.webp')} alt="Colagem com retrato e trabalhos de Thiago Peil" width="1536" height="1536" loading="lazy" decoding="async" />
         <div><span class="eyebrow">Thiago Peil</span><h2>Desenhos e tatuagens.</h2><p>Conheça os trabalhos reunidos por Thiago e fale com a Fallen.</p><em>Ver página do artista</em></div>
       </a>
     </div>
@@ -25,9 +25,10 @@ import { url } from '../../lib/paths';
   .artist-feature { min-height: 520px; display: grid; grid-template-columns: 1.15fr .85fr; overflow: hidden; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); transition: transform .3s var(--ease), border-color .3s ease; }
   .artist-feature:hover { transform: translateY(-6px); border-color: rgba(211,179,124,.45); }
   .artist-feature img { width: 100%; height: 100%; object-fit: cover; }
+  .artist-feature--collage img { object-fit: contain; background: #090909; }
   .artist-feature div { display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(30px, 6vw, 72px); }
   .artist-feature p { margin: 22px 0; color: var(--muted); }
   .artist-feature em { color: var(--gold-bright); font-style: normal; font-weight: 700; }
   .artist-feature--reverse img { order: 2; }
-  @media (max-width: 760px) { .artist-feature { grid-template-columns: 1fr; min-height: 0; } .artist-feature img { max-height: 420px; aspect-ratio: 4 / 3; object-position: center 32%; } .artist-feature--reverse img { order: initial; } }
+  @media (max-width: 760px) { .artist-feature { grid-template-columns: 1fr; min-height: 0; } .artist-feature img { max-height: 390px; aspect-ratio: 4 / 3; object-position: center 32%; } .artist-feature--reverse img { order: initial; } .artist-feature--collage img { max-height: none; aspect-ratio: 1; object-fit: contain; } }
 </style>

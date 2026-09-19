@@ -8,12 +8,11 @@ import { url } from '../lib/paths';
 <BaseLayout title="Fallen Tattoo Studio" description="Estúdio de tatuagem no Centro Histórico de Salvador. Projetos personalizados, portfólio, artistas, serviços e orçamento pelo WhatsApp.">
   <section class="home-hero">
     <div class="hero-motion" aria-hidden="true">
+      <span class="hero-aura hero-aura--gold"></span><span class="hero-aura hero-aura--wine"></span>
       <span class="hero-orbit hero-orbit--one"></span><span class="hero-orbit hero-orbit--two"></span>
-      <div class="hero-fragment hero-fragment--left"><img src={url('/images/03-portfolio-vinicius-snake-roses.png')} width="1229" height="1536" alt="" /></div>
-      <div class="hero-fragment hero-fragment--right"><img src={url('/images/08-portfolio-vinicius-ship-color.webp')} width="1229" height="1536" alt="" /></div>
     </div>
     <div class="hero-content wrap">
-      <div class="hero-mark"><img src={url('/images/01-brand-logo-fallen.png')} width="512" height="640" alt="Símbolo da Fallen Tattoo Studio" fetchpriority="high" /></div>
+      <div class="hero-mark"><img src={url('/images/01-brand-logo-fallen.png')} width="1536" height="1536" alt="Símbolo da Fallen Tattoo Studio" fetchpriority="high" /></div>
       <div class="hero-copy">
         <span class="hero-location">Centro Histórico · Salvador</span>
         <h1><span>Fallen</span><span>Tattoo Studio</span></h1>
@@ -36,7 +35,7 @@ import { url } from '../lib/paths';
       <div class="home-service-grid">
         {services.slice(0,3).map((service) => (
           <article class="service-row" data-reveal="right" data-interactive-card>
-            <div><h3>{service.title}</h3><p>{service.text}</p></div><img src={service.image.src} alt={service.image.alt} width={service.image.width} height={service.image.height} loading="lazy" />
+            <div><h3>{service.title}</h3><p>{service.text}</p></div><img src={service.image.src} alt={service.image.alt} width={service.image.width} height={service.image.height} loading="lazy" decoding="async" />
           </article>
         ))}
       </div>
@@ -49,7 +48,7 @@ import { url } from '../lib/paths';
       <div class="section-header" data-reveal="left"><div><span class="eyebrow">Estilos</span><h2>Referências para sua próxima tattoo.</h2></div><p>Blackwork, fine line, realismo e outros trabalhos disponíveis no portfólio.</p></div>
       <div class="card-grid">
         {styles.slice(0,3).map((style) => (
-          <article class="card" data-reveal><div class="card__image"><img src={style.image.src} alt={style.image.alt} width={style.image.width} height={style.image.height} loading="lazy" /></div><div class="card__body"><h3>{style.title}</h3><p>{style.text}</p></div></article>
+          <article class="card" data-reveal><div class="card__image"><img src={style.image.src} alt={style.image.alt} width={style.image.width} height={style.image.height} loading="lazy" decoding="async" /></div><div class="card__body"><h3>{style.title}</h3><p>{style.text}</p></div></article>
         ))}
       </div>
       <a class="button button--ghost section-action" href={url('/estilos/')}>Explorar estilos</a>
@@ -60,8 +59,8 @@ import { url } from '../lib/paths';
     <div class="wrap">
       <div class="section-header" data-reveal="left"><div><span class="eyebrow">Artistas</span><h2>Vinícius Medrado e Thiago Peil.</h2></div><p>Conheça os artistas e veja os trabalhos apresentados por cada um.</p></div>
       <div class="artist-pair">
-        <a class="artist-card card" href={url('/artistas/vinicius-medrado/')} data-reveal="left"><img src={url('/images/11-artist-vinicius-machine-portrait.webp')} alt="Vinícius Medrado segurando uma máquina de tatuagem" width="1235" height="1536" loading="lazy" /><div><h3>Vinícius Medrado</h3><em>Ver página do artista</em></div></a>
-        <a class="artist-card card" href={url('/artistas/thiago-peil/')} data-reveal="right"><img src={url('/images/13-artist-thiago-collage.webp')} alt="Colagem de trabalhos e retrato de Thiago Peil" width="1536" height="1536" loading="lazy" /><div><h3>Thiago Peil</h3><em>Ver página do artista</em></div></a>
+        <a class="artist-card card" href={url('/artistas/vinicius-medrado/')} data-reveal="left"><img src={url('/images/11-artist-vinicius-machine-portrait.webp')} alt="Vinícius Medrado segurando uma máquina de tatuagem" width="1235" height="1536" loading="lazy" decoding="async" /><div><h3>Vinícius Medrado</h3><em>Ver página do artista</em></div></a>
+        <a class="artist-card artist-card--collage card" href={url('/artistas/thiago-peil/')} data-reveal="right"><img src={url('/images/13-artist-thiago-collage.webp')} alt="Colagem de trabalhos e retrato de Thiago Peil" width="1536" height="1536" loading="lazy" decoding="async" /><div><h3>Thiago Peil</h3><em>Ver página do artista</em></div></a>
       </div>
     </div>
   </section>
@@ -70,7 +69,7 @@ import { url } from '../lib/paths';
     <div class="wrap">
       <div class="section-header" data-reveal="left"><div><span class="eyebrow">Portfólio</span><h2>Trabalhos da Fallen.</h2></div><p>Abra o portfólio para ver cada foto em tamanho ampliado.</p></div>
       <div class="editorial-grid">
-        {portfolio.slice(1,7).map((item, index) => <a href={url('/portfolio/')} class={`editorial-grid__item item-${index + 1}`} data-reveal><img src={item.src} alt={item.alt} width={item.width} height={item.height} loading="lazy" /><span>{item.style}</span></a>)}
+        {portfolio.slice(1,7).map((item, index) => <a href={url('/portfolio/')} class={`editorial-grid__item item-${index + 1}`} data-reveal><img src={item.src} alt={item.alt} width={item.width} height={item.height} loading="lazy" decoding="async" /><span>{item.style}</span></a>)}
       </div>
       <a class="button section-action" href={url('/portfolio/')}>Ver portfólio completo</a>
     </div>
@@ -78,7 +77,7 @@ import { url } from '../lib/paths';
 
   <section class="section studio-split section--line">
     <div class="wrap studio-grid">
-      <div class="studio-image" data-reveal><img src={url('/images/14-studio-interior-fallen.webp')} alt="Interior da Fallen Tattoo Studio com maca, sofá e símbolo da marca" width="1536" height="1536" loading="lazy" /></div>
+      <div class="studio-image" data-reveal><img src={url('/images/14-studio-interior-fallen.webp')} alt="Interior da Fallen Tattoo Studio com maca, sofá e símbolo da marca" width="1536" height="1536" loading="lazy" decoding="async" /></div>
       <div class="studio-copy" data-reveal><span class="eyebrow">Fallen por dentro</span><h2>Um espaço no Centro Histórico.</h2><p class="lede">A Fallen atende no Ed. Santa Cruz, na Rua do Tesouro.</p><p class="muted">Veja a localização, abra a rota no Google Maps ou converse com a equipe pelo WhatsApp antes da visita.</p><address>{studio.address}</address><div class="button-row"><a class="button" href={studio.maps} target="_blank" rel="noreferrer">Abrir no Maps</a><a class="button button--ghost" href={url('/contato/')}>Ver contato</a></div></div>
     </div>
   </section>
@@ -98,49 +97,47 @@ import { url } from '../lib/paths';
 </BaseLayout>
 
 <style>
-  .home-hero { position: relative; min-height: min(880px, calc(100svh - 74px)); display: grid; place-items: center; overflow: hidden; isolation: isolate; background: radial-gradient(circle at 50% 44%, rgba(74,21,24,.32), transparent 34%), #060606; }
+  .home-hero { position: relative; min-height: clamp(650px, calc(100svh - 74px), 820px); display: grid; place-items: center; overflow: hidden; isolation: isolate; background: radial-gradient(circle at 50% 44%, rgba(74,21,24,.3), transparent 38%), #060606; }
   .home-hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(0,0,0,.66), transparent 30% 70%, rgba(0,0,0,.66)), linear-gradient(0deg, #060606 0%, transparent 25% 80%, #060606); }
   .hero-motion { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
-  .hero-motion::before, .hero-motion::after { content: ''; position: absolute; width: 54vw; aspect-ratio: 1; border-radius: 42% 58% 36% 64%; filter: blur(90px); opacity: .24; will-change: transform; }
-  .hero-motion::before { left: -24vw; top: -16vw; background: #896231; animation: hero-glow-left 11s ease-in-out infinite alternate; }
-  .hero-motion::after { right: -25vw; bottom: -18vw; background: #761326; animation: hero-glow-right 13s ease-in-out -4s infinite alternate; }
-  .hero-orbit { position: absolute; inset: 50% auto auto 50%; width: min(68vw, 780px); aspect-ratio: 1; border: 1px solid rgba(211,179,124,.13); border-radius: 50%; transform: translate(-50%, -50%); animation: orbit 18s linear infinite; }
+  .hero-aura { position: absolute; width: 72vmax; aspect-ratio: 1; border-radius: 50%; opacity: .85; will-change: transform; animation-play-state: paused; }
+  .hero-aura--gold { left: -48vmax; top: -46vmax; background: radial-gradient(circle, rgba(174,135,82,.38), rgba(174,135,82,.12) 35%, transparent 68%); animation: hero-glow-left 9s ease-in-out infinite alternate; }
+  .hero-aura--wine { right: -50vmax; bottom: -48vmax; background: radial-gradient(circle, rgba(126,18,39,.46), rgba(126,18,39,.13) 36%, transparent 68%); animation: hero-glow-right 11s ease-in-out -3s infinite alternate; }
+  .hero-orbit { position: absolute; inset: 50% auto auto 50%; width: min(68vw, 780px); aspect-ratio: 1; border: 1px solid rgba(211,179,124,.13); border-radius: 50%; transform: translate(-50%, -50%); animation: orbit 15s linear infinite; animation-play-state: paused; }
   .hero-orbit::after { content: ''; position: absolute; top: 11%; left: 9%; width: 7px; aspect-ratio: 1; border-radius: 50%; background: var(--gold-bright); box-shadow: 0 0 28px 10px rgba(211,179,124,.25); }
-  .hero-orbit--two { width: min(48vw, 550px); border-color: rgba(255,255,255,.07); animation-direction: reverse; animation-duration: 12s; }
-  .hero-fragment { position: absolute; width: clamp(150px, 18vw, 280px); aspect-ratio: 3 / 4; overflow: hidden; opacity: .21; filter: grayscale(1) contrast(1.2); animation: fragment-float 9s ease-in-out infinite alternate; }
-  .hero-fragment img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-fragment--left { left: 3vw; bottom: -4%; clip-path: polygon(0 15%, 85% 0, 100% 84%, 17% 100%); transform: rotate(-6deg); }
-  .hero-fragment--right { right: 2vw; top: 5%; clip-path: polygon(14% 0, 100% 17%, 82% 100%, 0 82%); transform: rotate(7deg); animation-delay: -4s; }
+  .hero-orbit--two { width: min(48vw, 550px); border-color: rgba(255,255,255,.07); animation-direction: reverse; animation-duration: 10s; }
+  .home-hero.motion-active .hero-aura, .home-hero.motion-active .hero-orbit { animation-play-state: running; }
   .hero-content { position: relative; display: grid; justify-items: center; align-content: center; gap: 4px; padding-block: clamp(28px, 5vh, 58px); text-align: center; }
-  .hero-mark { width: clamp(130px, 16vw, 190px); aspect-ratio: 4 / 5; clip-path: inset(0 100% 0 0); filter: drop-shadow(0 18px 38px rgba(0,0,0,.7)); animation: brand-reveal .72s .08s var(--ease) forwards; }
+  .hero-mark { width: clamp(148px, 17vw, 210px); aspect-ratio: 1; clip-path: inset(0 100% 0 0); filter: drop-shadow(0 18px 34px rgba(0,0,0,.62)); animation: brand-reveal .64s .06s var(--ease) forwards; }
   .hero-mark img { width: 100%; height: 100%; object-fit: contain; }
   .hero-copy { display: grid; justify-items: center; }
   .hero-location { margin-bottom: 10px; color: var(--gold-bright); font-size: .72rem; font-weight: 760; letter-spacing: .17em; text-transform: uppercase; opacity: 0; animation: hero-rise .36s .38s var(--ease) forwards; }
-  .hero-copy h1 { font-size: clamp(4.2rem, 8vw, 7.8rem); line-height: .78; letter-spacing: -.075em; }
+  .hero-copy h1 { font-size: clamp(4.4rem, 8vw, 7.8rem); line-height: .8; letter-spacing: -.07em; }
   .hero-copy h1 span { display: block; opacity: 0; transform: translateY(80%); animation: title-line .58s var(--ease) forwards; }
   .hero-copy h1 span:nth-child(1) { animation-delay: .44s; }
   .hero-copy h1 span:nth-child(2) { margin-top: .13em; color: #d2cbc1; font-size: .38em; letter-spacing: .08em; text-transform: uppercase; animation-delay: .53s; }
-  .hero-copy p { max-width: 560px; margin: 20px 0 22px; color: #c8c1b8; font-size: clamp(.98rem, 1.55vw, 1.16rem); opacity: 0; animation: hero-rise .42s .7s var(--ease) forwards; }
+  .hero-copy p { max-width: 580px; margin: 18px 0 22px; color: #c8c1b8; font-size: clamp(.98rem, 1.55vw, 1.16rem); opacity: 0; animation: hero-rise .42s .66s var(--ease) forwards; }
   .hero-copy .button-row { justify-content: center; opacity: 0; animation: hero-rise .42s .86s var(--ease) forwards; }
   @keyframes brand-reveal { to { clip-path: inset(0); } }
   @keyframes title-line { to { opacity: 1; transform: none; } }
   @keyframes hero-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-  @keyframes hero-glow-left { to { transform: translate3d(28vw, 18vh, 0) rotate(24deg) scale(1.12); } }
-  @keyframes hero-glow-right { to { transform: translate3d(-24vw, -20vh, 0) rotate(-22deg) scale(.88); } }
+  @keyframes hero-glow-left { to { transform: translate3d(32vw, 25vh, 0) scale(1.1); } }
+  @keyframes hero-glow-right { to { transform: translate3d(-28vw, -23vh, 0) scale(.9); } }
   @keyframes orbit { to { transform: translate(-50%, -50%) rotate(360deg); } }
-  @keyframes fragment-float { to { translate: 0 -24px; filter: grayscale(.7) contrast(1.2); } }
   .intro-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(50px, 10vw, 140px); align-items: start; }
   .section-action { margin-top: 38px; }
   .home-service-grid { border-top: 1px solid var(--line); }
   .service-row { --rx: 0deg; --ry: 0deg; display: grid; grid-template-columns: 1fr 150px; align-items: center; gap: 38px; min-height: 190px; border-bottom: 1px solid var(--line); transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)); transition: transform .4s var(--ease), background .3s ease, padding .35s var(--ease); }
   .service-row:hover { padding-inline: 22px; background: linear-gradient(90deg, rgba(174,135,82,.09), transparent 72%); }
   .service-row p { margin: 8px 0 0; max-width: 650px; color: var(--muted); }
-  .service-row img { width: 150px; height: 150px; border-radius: 2px; object-fit: cover; filter: grayscale(.4); transition: filter .3s ease, transform .3s var(--ease); }
-  .service-row:hover img { filter: none; transform: scale(1.025); }
+  .service-row img { width: 150px; height: 150px; border-radius: 2px; object-fit: cover; opacity: .88; transition: opacity .3s ease, transform .3s var(--ease); }
+  .service-row:hover img { opacity: 1; transform: scale(1.025); }
   .styles-preview { background: linear-gradient(180deg, rgba(255,255,255,.018), transparent); }
   .artist-pair { display: grid; grid-template-columns: 1.12fr .88fr; gap: 24px; }
   .artist-card { min-height: 560px; }
   .artist-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .artist-card--collage { background: #090909; }
+  .artist-card--collage img { object-fit: contain; }
   .artist-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.9), transparent 55%); }
   .artist-card div { position: absolute; z-index: 2; inset: auto 0 0; padding: 34px; }
   .artist-card span { color: var(--gold-bright); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
@@ -150,7 +147,7 @@ import { url } from '../lib/paths';
   .editorial-grid__item { position: relative; overflow: hidden; border-radius: 3px; }
   .editorial-grid__item img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s var(--ease); }
   .editorial-grid__item:hover img { transform: scale(1.035); }
-  .editorial-grid__item span { position: absolute; left: 16px; bottom: 16px; padding: 6px 10px; border-radius: 999px; background: rgba(5,5,5,.78); backdrop-filter: blur(8px); font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .editorial-grid__item span { position: absolute; left: 16px; bottom: 16px; padding: 6px 10px; border-radius: 999px; background: rgba(5,5,5,.88); font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
   .item-1 { grid-column: 1 / 6; grid-row: span 6; } .item-2 { grid-column: 6 / 10; grid-row: span 4; } .item-3 { grid-column: 10 / 13; grid-row: span 5; } .item-4 { grid-column: 6 / 10; grid-row: span 5; } .item-5 { grid-column: 10 / 13; grid-row: span 4; } .item-6 { grid-column: 1 / 6; grid-row: span 4; }
   .studio-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(42px, 8vw, 110px); align-items: center; }
   .studio-image { border-radius: 3px; overflow: hidden; }
@@ -158,7 +155,19 @@ import { url } from '../lib/paths';
   .studio-copy address { margin: 28px 0; padding-left: 18px; border-left: 1px solid var(--gold); color: #d4cec5; font-style: normal; }
   .faq-home-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(48px, 10vw, 140px); }
   .location-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(40px, 7vw, 90px); align-items: center; }
-  .location-grid iframe { width: 100%; min-height: 440px; border: 0; border-radius: 3px; filter: grayscale(1) invert(.9) contrast(.85); }
-  @media (max-width: 900px) { .intro-grid, .studio-grid, .faq-home-grid, .location-grid { grid-template-columns: 1fr; } .artist-card { min-height: 500px; } .hero-fragment { opacity: .15; } }
-  @media (max-width: 640px) { .home-hero { min-height: calc(100svh - 68px); max-height: 820px; } .hero-content { gap: 2px; padding-block: 24px 30px; } .hero-mark { width: clamp(112px, 34vw, 154px); } .hero-copy h1 { font-size: clamp(3.55rem, 19vw, 5.2rem); } .hero-copy p { max-width: 340px; margin: 18px 0 20px; line-height: 1.55; } .hero-copy .button-row { width: min(100%, 360px); display: grid; grid-template-columns: 1fr 1fr; } .hero-copy .button { min-height: 46px; padding-inline: 12px; font-size: .68rem; } .hero-location { margin-bottom: 7px; font-size: .61rem; } .hero-fragment { width: 34vw; opacity: .11; } .hero-fragment--left { left: -9vw; } .hero-fragment--right { right: -8vw; } .hero-orbit { width: 110vw; } .service-row { grid-template-columns: 1fr 88px; gap: 18px; min-height: 122px; padding-block: 18px; } .service-row:hover { padding-inline: 0; } .service-row img { display: block; width: 88px; height: 88px; } .artist-pair { grid-template-columns: 1fr; } .artist-card { min-height: 390px; } .editorial-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 190px; gap: 8px; } .editorial-grid__item { grid-column: auto !important; grid-row: auto !important; } .editorial-grid__item:nth-child(3n+1) { grid-column: 1 / -1 !important; } .location-grid iframe { min-height: 340px; } }
+  .location-grid iframe { width: 100%; min-height: 440px; border: 0; border-radius: 3px; }
+  @media (max-width: 900px) { .intro-grid, .studio-grid, .faq-home-grid, .location-grid { grid-template-columns: 1fr; } .artist-card { min-height: 500px; } }
+  @media (max-width: 640px) { .home-hero { min-height: clamp(590px, calc(100svh - 68px), 650px); } .hero-content { gap: 2px; padding-block: 22px 26px; } .hero-mark { width: clamp(126px, 37vw, 160px); } .hero-copy h1 { font-size: clamp(3.45rem, 18vw, 5rem); } .hero-copy p { max-width: 340px; margin: 16px 0 18px; line-height: 1.5; } .hero-copy .button-row { width: min(100%, 360px); display: grid; grid-template-columns: 1fr 1fr; } .hero-copy .button { min-height: 46px; padding-inline: 10px; font-size: .66rem; } .hero-location { margin-bottom: 7px; font-size: .61rem; } .hero-orbit { width: 110vw; } .hero-aura { width: 112vmax; opacity: .62; } .service-row { grid-template-columns: 1fr 88px; gap: 18px; min-height: 122px; padding-block: 18px; } .service-row:hover { padding-inline: 0; } .service-row img { display: block; width: 88px; height: 88px; } .artist-pair { grid-template-columns: 1fr; } .artist-card { min-height: 360px; } .editorial-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(142px, 42vw, 178px); gap: 8px; } .editorial-grid__item, .editorial-grid__item:nth-child(n) { grid-column: auto !important; grid-row: auto !important; } .editorial-grid__item:nth-child(3n+1) { grid-column: 1 / -1 !important; } .location-grid iframe { min-height: 320px; } }
 </style>
+
+<script>
+  const animatedHero = document.querySelector('.home-hero');
+  if (animatedHero && 'IntersectionObserver' in window) {
+    const heroMotionObserver = new IntersectionObserver(([entry]) => {
+      animatedHero.classList.toggle('motion-active', entry.isIntersecting);
+    }, { threshold: 0.04 });
+    heroMotionObserver.observe(animatedHero);
+  } else {
+    animatedHero?.classList.add('motion-active');
+  }
+</script>
